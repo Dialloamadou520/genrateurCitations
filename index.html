@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Ressources/css/bootstrap.min.css">
+    <script src="Ressources/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        html, body {
+  background: black;
+  height: 100%;
+  min-width: 500px;
+}
+
+#citation {
+  font-size: 2em;
+  font-family: Berlin sans FB;
+  line-height: 1.3em;
+  letter-spacing: 1px;
+}
+
+#citation:before {
+    content: open-quote;
+}
+
+#citation:after {
+    content: close-quote;
+}
+
+#auteur {
+  font-size: 1.5em;
+  font-style: italic;
+}
+
+#nouveau {
+  background: #ff9966;
+  background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);
+  background: linear-gradient(to right, #ff5e62, #ff9966);
+  cursor: pointer;
+}
+    </style>
+
+    <div class="container h-100">
+  
+        <div class="row align-items-center justify-content-center h-100">
+          
+          <div class="col-md-8 col-lg-6 p-3">
+            <div class="bg-light shadow p-5">
+              <div id="citation" class="text-center">
+                La vie est un mystère qu'il faut vivre, et non un problème à résoudre.
+              </div>
+              <div class="bg-secondary w-25 mx-auto p-1 my-4"></div>
+              <div id="auteur" class="text-center">
+                Gandhi
+              </div>
+            </div>
+            
+            <div id="nouveau" class="mt-2 text-center p-3 text-white font-weight-bold text-uppercase">
+              Nouvelle citation
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      <script>
+        let nouveau   = document.querySelector('#nouveau');
+        let citation  = document.querySelector('#citation');
+        let auteur    = document.querySelector('#auteur');
+
+let dernier   = 0;
+let nombreAleatoire = 0;
+let citations = [
+  ["La vie est un mystère qu'il faut vivre, et non un problème à résoudre.", "Gandhi"],
+  ["Le plus grand risque est de ne prendre aucun risque.", "Mark Zuckerberg"],
+  ["Méritez votre statut de leader chaque jour.", "Mickael Jordan"],
+  ["Soyez le changement que vous voulez voir dans le monde.", "Gandhi"],
+  ["A chaque fois que vous vous retrouvez du même côté que la majorité, il est temps de prendre du recul, et de réfléchir.", "Mark Twain"],
+  ["Seulement ceux qui prendront le risque d’aller trop loin découvriront jusqu’où on peut aller.", "T.S Elliot"],
+  ["Le succès c’est tomber sept fois, se relever huit.", "Proverbe japonais"],
+  ["Dans vingt ans vous serez plus déçus par les choses que vous n’avez pas faites que par celles que vous avez faites. Alors sortez des sentiers battus. Mettez les voiles. Explorez. Rêvez. Découvrez.", "Mark Twain"],
+  ["Si vous attendez pour agir, tout ce que vous gagnerez, avec le temps, c’est de l’âge.", "Brian Tracy"],
+  ["Quand on concentre son attention sur un seul projet, l’esprit suggère constamment des idées et des améliorations qui lui échapperaient s’il était occupé avec plusieurs projets en même temps.", "P.T. Barnum"],
+  ["Se dédier à faire tout ce que l’on peut pour aider les autres à obtenir ce qu’ils veulent, c’est la clé du succès.", "Brian Sher"],
+  ["Si vous pensez que vous êtes trop petit pour avoir de l’impact, essayez d’aller au lit avec un moustique.", "Anita Roddick"],
+  ["Ne jugez pas chaque jour sur ce que vous récoltez, mais sur les graines que vous semez.", "Robert Louis Stevenson"],
+  ["L’action est la clé fondamentale de tout succès.", "Pablo Picasso"],
+  ["Le succès, c’est se promener d’échecs en échecs tout en restant motivé.", "Winston Churchill"],
+  ["Votre avenir est créé par ce que vous faîtes aujourd’hui, pas demain.", "Robert T. Kiyosaki"],
+  ["Ne vous découragez pas, c’est souvent la dernière clef du trousseau qui ouvre la porte.", "Zig Ziglar"],
+  ["Pour gagner votre vie, apprenez à l’école. Pour gagner une fortune, apprenez par vous-même.", "Brian Tracy"],
+  ["Les gagnants trouvent des moyens, les perdants des excuses…", "F. D. Roosevelt"],
+  ["Ku yàgg ci teen, baag fekk la fa.","Wolof Ndiaye Neena"],
+  ["Bu la taar bi taxa lew, ndax laago du wess.","Wolof Ndiaye Neena"],
+  ["Seytané wakhoul deugg wanté yakhanab khél","Wolof Ndiaye Neena"],
+  ["Lu Feegn ci sey, nuyoo wone na ca ngoro ga, dagnou ko fayul.","Wolof Ndiaye Neena"],
+  ["Ku bëg teendj dangay taary.","Wolof Ndiaye Neena"],
+  ["Lo doonul talibeem, mënulo doone serignam.","Wolof Ndiaye Neena"],
+  ["Xalel poto-poto la, nooko raaxeh rek lay weyeh.","Wolof Ndiaye Neena"],
+  ["Yàgg du saabu, waaye dana fóót.","Wolof Ndiaye Neena"],
+  ["Yàgg ay wone légétub taat.","Wolof Ndiaye Neena"],
+  ["Ndànk-ndànk ay jàpp golo cib ñaay.","Wolof Ndiaye Neena"],
+  ["Su may dee ci àll, gayndee may rey.","Wolof Ndiaye Neena"],
+  ["Picc mu masula naaw, su naawee firim rééw.","Wolof Ndiaye Neena"],
+  ["Ku xamul suurnaa, dangay téyé ca loxo ba.","Wolof Ndiaye Neena"],
+  ["Soo xamoon li lay yoot, nga bàyyi li ngay yoot, te daw.","Wolof Ndiaye Neena"],
+  ["Vous n’êtes jamais trop vieux pour vous fixer de nouveaux buts, ou rendre vos rêves réalité.", "C.S. Lewis"],
+  ["Un pessimiste voit la difficulté dans chaque opportunité. Un optimiste voit une opportunité dans chaque difficulté.", "Winston Churchill"]
+];
+
+// Fonction permettant de générer un nombre aléatoire
+function genererNombreEntier(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+nouveau.addEventListener('click', () => {
+  do {
+    nombreAleatoire = genererNombreEntier(citations.length);
+  } while (nombreAleatoire == dernier)
+    
+  citation.textContent = citations[nombreAleatoire][0];
+  auteur.textContent   = citations[nombreAleatoire][1];
+  dernier              = nombreAleatoire;
+});
+    </script>
+</body>
+</html>
